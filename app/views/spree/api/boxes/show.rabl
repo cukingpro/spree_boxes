@@ -1,4 +1,5 @@
 object @box
 
 attributes :id, :name, :descriptions
-child(:products){extends "spree/api/products/show"}
+child(:variant_images => :images) { extends "spree/api/images/show" }
+child(:products => :products){extends "spree/api/products/show"}
