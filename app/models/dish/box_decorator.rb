@@ -5,8 +5,12 @@ Dish::Box.class_eval do
                     Dish::DishType.soup.most_liked_of_date(date) ,
                     Dish::DishType.vegetable.most_liked_of_date(date)]
     # box.products = [Dish::DishType.main_most_like
-    # 				]
+    #               ]
     # box.save
     return box
   end
+
+  def approved_comments
+    Dish::Comment.where(box_id: self.id, status: 1).order(updated_at: :desc)
+  end 
 end
