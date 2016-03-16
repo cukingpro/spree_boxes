@@ -5,11 +5,13 @@ module Spree
       skip_before_action :authenticate_user
 
       def index
+        @user_id = request.headers["X-Spree-Token"].present? ? current_api_user.id : nil;
         @boxes = Dish::Box.all
         render "spree/api/boxes/index"
       end
 
       def show
+        @user_id = request.headers["X-Spree-Token"].present? ? current_api_user.id : nil;
         @box = Dish::Box.find(params[:id])
         render "spree/api/boxes/show"
       end
