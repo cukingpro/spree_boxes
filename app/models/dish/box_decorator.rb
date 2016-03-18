@@ -1,4 +1,5 @@
 Dish::Box.class_eval do
+  attr_accessor :delivery
 
   has_many :likes, :class_name => "Dish::Like", foreign_key: 'box_id'
   has_many :users, :through => :likes, :class_name => "Spree::User"
@@ -26,6 +27,17 @@ Dish::Box.class_eval do
   def current_user_like?(user_id)
     return false if user_id.blank?
     self.likes.pluck(:user_id).include?(user_id)
+  end
+
+  def box_product_date(date = nil)
+
+    box_product_dates = date ? self.box_products.where(delivery_date: date) : self.box_products
+    @delivery = box_product_dates.group_by{ |h| h[:delivery_date] }.map do |k,v|
+      {
+        date: k,
+        products: v.map{ |a| Spree::Product.find(a[:product_id]) }
+      }
+    end
   end
 
 end
