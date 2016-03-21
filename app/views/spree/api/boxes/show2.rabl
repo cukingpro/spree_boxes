@@ -9,6 +9,6 @@ child(:approved_comments => :comments) { extends "spree/api/comments/show" }
 child(@box.box_product_date(@date) => :delivery) do 
 	node() { | delivery_product| 
 		node(:date) { delivery_product[:date] }
-		child(delivery_product[:products] => :products) { extends "spree/api/products/show_simple"}
+		child(delivery_product[:products] => :products) { extends "spree/api/products/show_simple2"}
 	}
 end
