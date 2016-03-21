@@ -1,2 +1,2 @@
 collection @boxes
-extends "spree/api/boxes/show2"
+extends "spree/api/boxes/show_simple"

@@ -10,6 +10,7 @@ module Spree
       end
 
       def show
+        @date = params[:date] ? Date.parse(params[:date]) : nil
         @box = Dish::Box.find(params[:id])
         @type= @box.is_active
         if @box.is_active
@@ -33,7 +34,7 @@ module Spree
       def daily_box
         @box = Dish::Box.find_by(is_active: true)
         @date = params[:date] ? Date.parse(params[:date]) : nil
-        render "spree/api/boxes/show2"
+        render "spree/api/boxes/show_simple"
       end
 
     end
