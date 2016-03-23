@@ -40,8 +40,9 @@ Dish::Box.class_eval do
   #   end
   # end
 
-  def box_product_date(date_from, date_to)
-    box_product_dates = self.box_products.where(delivery_date: date_from..date_to)
+  def box_product_date(date_from, date_to=nil)
+    box_product_dates = date_to ? self.box_products.where(delivery_date: date_from..date_to) :
+    							  self.box_products.where(delivery_date: date_from)
     @delivery = box_product_dates.group_by{ |h| h[:delivery_date] }.map do |k,v|
       {
         date: k,
