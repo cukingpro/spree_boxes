@@ -1,3 +1,4 @@
+
 object @box
 
 attributes :id, :name, :descriptions,:is_active => :type

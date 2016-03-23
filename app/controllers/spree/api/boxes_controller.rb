@@ -33,9 +33,23 @@ module Spree
 
       def daily_box
         @box = Dish::Box.find_by(is_active: true)
+        @date_from = params[:date_from] ? Date.parse(params[:date_from]) : nil
+        @date_to = params[:date_to] ? Date.parse(params[:date_to]) : nil
         @date = params[:date] ? Date.parse(params[:date]) : nil
-        render "spree/api/boxes/show_simple"
+        render "spree/api/boxes/show_simple" if @date_from
+        render "spree/api/boxes/show2" if @date
       end
+
+      def weekly_box
+        @box = Dish::Box.find_by(is_active: false)
+        @date_from = params[:date_from] ? Date.parse(params[:date_from]) : nil
+        @date_to = params[:date_to] ? Date.parse(params[:date_to]) : nil
+        @date = params[:date] ? Date.parse(params[:date]) : nil
+        render "spree/api/boxes/show_simple" if @date_from
+        render "spree/api/boxes/show2" if @date
+      end
+
+
 
     end
   end

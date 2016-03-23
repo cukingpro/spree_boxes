@@ -1,3 +1,5 @@
+#box detail
+
 object @box
 
 attributes :id, :name, :descriptions
