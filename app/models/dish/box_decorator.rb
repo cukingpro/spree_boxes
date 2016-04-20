@@ -29,17 +29,6 @@ Dish::Box.class_eval do
     self.likes.pluck(:user_id).include?(user_id)
   end
 
-  # def box_product_date(date = nil)
-
-  #   box_product_dates = date ? self.box_products.where(delivery_date: date) : self.box_products
-  #   @delivery = box_product_dates.group_by{ |h| h[:delivery_date] }.map do |k,v|
-  #     {
-  #       date: k,
-  #       products: v.map{ |a| Spree::Product.find(a[:product_id]) }
-  #     }
-  #   end
-  # end
-
   def box_product_date(date_from, date_to=nil)
     box_product_dates = date_to ? self.box_products.where(delivery_date: date_from..date_to) :
     							  self.box_products.where(delivery_date: date_from)
